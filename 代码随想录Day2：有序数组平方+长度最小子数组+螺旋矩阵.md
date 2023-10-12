@@ -45,7 +45,7 @@
   };
 ```
 
-# [长度最小子数组](https://leetcode.cn/problems/minimum-size-subarray-sum/)
+# [209.长度最小子数组](https://leetcode.cn/problems/minimum-size-subarray-sum/)
 ## 题解思路
 **1.暴力解法**
 暴力解法思路是使用两个for循环找符合条件的子序列，时间复杂度为O(n^2)
@@ -108,5 +108,54 @@
 
 # [59.螺旋矩阵](https://leetcode.cn/problems/spiral-matrix-ii/)
 ## 题解思路
-**1.模拟螺旋**
+**1.模拟螺旋**<br>
+第二次看还是没思路，只记得一个大概的轮廓，但是细节的部分基本上都没有过多留意，因此本次要整理处理细节。<br>
+如何模拟螺旋的过程？——使用两层循环来顺时针从(0, 0)遍历到res[mid][mid]<br>
+顺时针填充矩阵的过程：左闭右开
+- 填充上行从左到右：x = startx , y = [starty -> n - offset) 
+- 填充右列从上到下：x = [startx -> n - offset) , y = n - offset
+- 填充下行从右到左：x = n - offset , y = [n - offset -> starty)
+- 填充左列从下到上：x = [n - offset -> startx) , y = starty
+  
 ## 示例代码
+```C++
+  class Solution {
+  public:
+      vector<vector<int>> generateMatrix(int n) {
+          vector<vector<int>> res(n, vector<int>(n, 0));//define 2 dim vec
+          int startx = 0, starty = 0;//every circle start position
+          int loop = n / 2;//How many loop of circle
+          int mid = n / 2;
+          int count = 1;
+          int offset = 1;//control every length of edge
+          int i, j;
+          while (loop--){
+              i = startx;
+              j = starty;
+  
+              //four for loop to simulate one circle
+              for (j = starty; j < n - offset; j++){
+                  res[startx][j] = count++;
+              }
+              for (i = startx; i < n - offset; i++){
+                  res[i][j] = count++;
+              }
+              for ( ; j > starty; j--){
+                  res[i][j] = count++;
+              }
+              for ( ; i > startx; i--){
+                  res[i][j] = count++;
+              }
+              startx++;
+              starty++;
+              
+              offset += 1;
+              //offset = n - loop
+          }
+          if (n % 2){
+              res[mid][mid] = count;
+          } 
+          return res;
+      }
+  };
+```
