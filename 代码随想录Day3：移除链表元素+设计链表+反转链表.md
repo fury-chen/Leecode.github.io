@@ -54,7 +54,7 @@
 
 ## 示例代码
 
-```class Solution {
+```C++
 //This is a operating Original Linked List code
 class Solution {
 public:
@@ -81,7 +81,7 @@ public:
 
 
 
-```
+```C++
 //This is a using dummy_head code
 class Solution {
 public:
