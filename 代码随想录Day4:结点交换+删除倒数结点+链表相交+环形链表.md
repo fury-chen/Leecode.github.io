@@ -1,4 +1,4 @@
-# [24.两两交换链表中的结点]([24. 两两交换链表中的节点 - 力扣（LeetCode）](https://leetcode.cn/problems/swap-nodes-in-pairs/))
+# [24.两两交换链表中的结点](https://leetcode.cn/problems/swap-nodes-in-pairs/)
 
 ## 题解思路
 
@@ -59,7 +59,7 @@ public:
 
 
 
-# [19.删除链表的倒数第N个节点]([19. 删除链表的倒数第 N 个结点 - 力扣（LeetCode）](https://leetcode.cn/problems/remove-nth-node-from-end-of-list/))
+# [19.删除链表的倒数第N个节点](https://leetcode.cn/problems/remove-nth-node-from-end-of-list/)
 
 ## 题解思路
 
@@ -108,7 +108,7 @@ public:
 
 
 
-# [面试题02.07.链表相交]([面试题 02.07. 链表相交 - 力扣（LeetCode）](https://leetcode.cn/problems/intersection-of-two-linked-lists-lcci/))
+# [面试题02.07.链表相交](https://leetcode.cn/problems/intersection-of-two-linked-lists-lcci/)
 
 ## 题解思路
 
@@ -171,7 +171,7 @@ public:
 
 
 
-# [142.环形链表]([142. 环形链表 II - 力扣（LeetCode）](https://leetcode.cn/problems/linked-list-cycle-ii/))
+# [142.环形链表](https://leetcode.cn/problems/linked-list-cycle-ii/)
 
 ## 题解思路
 
