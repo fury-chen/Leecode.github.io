@@ -175,5 +175,52 @@ public:
 
 ## 题解思路
 
+**1.是否有环**：
+
+- 使用快慢指针，fast每次移动两个节点，slow每次移动一个节点
+- 如果fast和slow在途中相遇，则说明这个链表有环
+- Why？——fast在环内总归会追上slow的，并且二者的速度差一直为1，不会被跳过去
+
+**2.入口判断**
+
+- 假设头结点到环的入口节点数为x，fast和slow的相遇节点为y，则可以得到以下关系
+
+$$
+(x + y) * 2 = x + y + n(y + z)\\
+x + y = n(y + z)\\
+x = (n - 1)(y + z) + z\\
+$$
+
+- 根据公式：两个节点分别从头结点和相遇节点出发，每次只走一步，两个指针会在入口处相遇
+
+**2.复杂度分析**
+
+- 时间复杂度：O(n)
+- 空间复杂度：O(1)
+
 ## 示例代码
+
+```C++
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        ListNode* fastIndex = head;
+        ListNode* slowIndex = head;
+        while (fastIndex != NULL && fastIndex->next != NULL){
+            slowIndex = slowIndex->next;
+            fastIndex = fastIndex->next->next;
+            if (slowIndex == fastIndex){
+                ListNode* index1 = fastIndex;
+                ListNode* index2 = head;
+                while (index1 != index2){
+                    index1 = index1->next;
+                    index2 = index2->next;
+                }
+                return index2;
+            }
+        }
+        return NULL;
+    }
+};
+```
 
