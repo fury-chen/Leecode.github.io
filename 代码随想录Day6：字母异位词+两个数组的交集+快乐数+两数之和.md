@@ -173,20 +173,20 @@ public:
 ## set的三种数据结构
 
 |        集合        | 底层实现 | 是否有序 | 是否可以重复数值 | 能否更改数值 | 查询效率 | 增删效率 |
-| :----------------: | :------: | -------- | ---------------- | ------------ | -------- | -------- |
-|      std::set      |  红黑树  | True     | False            | False        | O(logn)  | O(logn)  |
-|   std::multiset    |  红黑树  | True     | True             | False        | O(logn)  | O(logn)  |
-| std::unordered_set |  哈希表  | False    | False            | False        | O(1)     | O(1)     |
+| :----------------: | :------: | :------: | :--------------: | :----------: | :------: | :------: |
+|      std::set      |  红黑树  |   True   |      False       |    False     | O(logn)  | O(logn)  |
+|   std::multiset    |  红黑树  |   True   |       True       |    False     | O(logn)  | O(logn)  |
+| std::unordered_set |  哈希表  |  False   |      False       |    False     |   O(1)   |   O(1)   |
 
 > 红黑树是一种平衡二叉搜索树（BST），所以其键值是有序的
 
 ## map的三种数据结构
 
-| 映射               | 底层实现 | 是否有序 | 数值是否可以重复 | 能否更改数值 | 查询效率 | 增删效率 |
-| ------------------ | -------- | -------- | ---------------- | ------------ | -------- | -------- |
-| std::map           | 红黑树   | key有序  | key不可          | key不可      | O(logn)  | O(logn)  |
-| std::multimap      | 红黑树   | key有序  | key不可          | key不可      | O(logn)  | O(logn)  |
-| std::onordered_map | 哈希表   | key无序  | key不可          | key不可      | O(1)     | O(1)     |
+|        映射        | 底层实现 | 是否有序 | 数值是否可以重复 | 能否更改数值 | 查询效率 | 增删效率 |
+| :----------------: | :------: | :------: | :--------------: | :----------: | :------: | :------: |
+|      std::map      |  红黑树  | key有序  |     key不可      |   key不可    | O(logn)  | O(logn)  |
+|   std::multimap    |  红黑树  | key有序  |     key不可      |   key不可    | O(logn)  | O(logn)  |
+| std::onordered_map |  哈希表  | key无序  |     key不可      |   key不可    |   O(1)   |   O(1)   |
 
 ### 结论
 
