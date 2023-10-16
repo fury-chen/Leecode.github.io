@@ -54,7 +54,7 @@ public:
 
 ## 示例代码
 
-```C+
+```C++
 class Solution {
 public:
     vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
