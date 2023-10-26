@@ -95,7 +95,7 @@ public:
 };
 ```
 
-```C++\
+```C++
 class Solution {
 public:
     bool isSymmetric(TreeNode* root) {
