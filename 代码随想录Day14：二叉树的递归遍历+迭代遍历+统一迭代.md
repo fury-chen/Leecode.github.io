@@ -24,7 +24,7 @@
 ```C++
 class Solution{
 public:
-    void traversal(TreeNode* cur, vector<int> vec){
+    void traversal(TreeNode* cur, vector<int>& vec){
         if (cur == NULL) return ;
         vec.push_back(cur->val);
         traversal(cur->left, vec);
