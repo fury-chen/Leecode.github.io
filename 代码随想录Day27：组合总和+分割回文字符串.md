@@ -16,6 +16,7 @@
 - 单层搜索逻辑：
   - 循环从startIndex开始，搜索candidate集合
   - 这里使用startIndex的效果是不要搜索已经搜索过的位置
+  - cabdidate[0], candidate[1] 和 candidate[1], candidate[0]的效果是一样的所以需要startIndex来标识
 
 ## 示例代码
 
