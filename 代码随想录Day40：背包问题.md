@@ -6,6 +6,8 @@
 
 - 分析方法：每件物品只有两种状态，取或者不取，所以可以使用回溯来搜索所有的情况，其复杂度为$O(n^2)$，如果使用暴力解法就是指数级的复杂度
 
+- 说明：在放入第i个物品时，整个物品集被分为两部分，一部分是1~i-1个物品，一部分是i，i是确定要放入的，则前i-1个能够占用的空间为j - weight[i]，用这部分创造出的最大价值为dp[i - 1] [j - weight[i]]，加上此时要放入的i则是j - weight[i] + value[i]
+
 - 动态规划解法优化：
 
   <img src="https://code-thinking-1253855093.file.myqcloud.com/pics/20210110103003361.png" alt="动态规划-背包问题1" style="zoom:50%;" />
@@ -121,3 +123,27 @@ int main(){
 }
 ```
 
+## 暴力算法补充
+
+```C++
+int knapsackDFS(vector<int>& weight, vector<int> value, int i, int c){
+    if (i == 0 || c == 0){return 0;}//finish or out of capacity
+    if (weight[i - 1] > c){return knapsackDFS(weight, value, i, c);}
+    int no = knapsackDFS(weight, value, i - 1, c);
+    int yes = knapsackDFS(weight, value, i - 1, c - weight[i] + value[i - 1]);
+    return max(yes, no);
+}
+```
+
+## 完全背包问题
+
+- 问题描述：给定n个物品，第i个物品的重量为weight[i - 1]，价值为value[i - 1]和一个容量为capacity的背包，每个物品可以重复选取，问在不超过背包容量的情况下能够放入物品的最大价值
+  - 在01背包中，每个物品仅有一个，因此将物品i放入背包之后，只能从前i - 1个物品中选择
+  - 在完全背包中，每个物品有无数个，因此将物品i放入背包后，仍可以从前i个物品中选择
+- dp数组的变化：
+  - 不放入物品i：与01背包相同，状态变为dp[i - 1] [j]
+  - 放入物品i：状态变为dp[i] [ j - weight[i - 1]]
+  - 状态转移方程：dp[i] [j] = max(dp[i - 1] [j], dp[i] [j - weight[i - 1]] + value[i - 1])
+
+- dp数组的刷新顺序：先遍历数组 = 横向去刷新数组 ； 先遍历背包 = 纵向去刷新数组
+- 结论：只要左上或是左边有值，就不影响值的刷新更新，因为当前的最大值是唯一的；由此先遍历背包或先遍历物品都是一样的（纯完全背包问题）
