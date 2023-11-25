@@ -98,3 +98,43 @@ public:
 };
 ```
 
+# [377. 组合总和 Ⅳ](https://leetcode.cn/problems/combination-sum-iv/)
+
+## 题解思路
+
+- 题意当中有误导含义：说是求组合，但是本质上是求符合条件的排列，如果要求的是排列的所有结果，就需要用到回溯算法，而题目要求的是求排列和，即符合要求的排列有多少种
+
+**完全背包**
+
+- dp数组含义：符合目标的排列个数
+- 确定递推公式：装满背包的公式为dp[i] += dp[i - nums[j]]
+- 初始化：当背包为0的时候认为为0种可能
+- 确定遍历顺序：
+  - 求组合：外层for循环物品，内层for循环为背包
+  - 求排列：外层背包，内层物品
+
+**复杂度分析**
+
+- 时间复杂度：O(target*n)
+- 空间复杂度：O(target)
+
+## 示例代码
+
+```C++
+class Solution {
+public:
+    int combinationSum4(vector<int>& nums, int target) {
+        vector<int> dp(target + 1, 0);
+        dp[0] = 1;
+        for (int i = 0; i <= target; i++){
+            for (int j = 0; j < nums.size(); j++){
+                if (i - nums[j] >= 0 && dp[i] < INT_MAX - dp[i - nums[j]]){
+                    dp[i] += dp[i - nums[j]];
+                }
+            }
+        }
+        return dp[target];
+    }
+};
+```
+
