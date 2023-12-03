@@ -1,6 +1,6 @@
 
 
-# [剑指 Offer 04. 二维数组中的查找]([15. 二维数组中的查找 - AcWing题库](https://www.acwing.com/problem/content/description/16/))
+# [剑指 Offer 04. 二维数组中的查找]((https://www.acwing.com/problem/content/description/16/))
 
 ```C++
 class Solution {
