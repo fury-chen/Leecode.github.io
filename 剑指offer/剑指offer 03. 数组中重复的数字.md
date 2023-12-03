@@ -1,4 +1,4 @@
-# [剑指offer 03. 数组中重复的数字]([13. 找出数组中重复的数字 - AcWing题库](https://www.acwing.com/problem/content/14/))
+# [剑指offer 03. 数组中重复的数字](https://www.acwing.com/problem/content/14/)
 
 ```C++
 class Solution {
