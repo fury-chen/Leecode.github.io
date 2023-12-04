@@ -61,3 +61,63 @@ int main(){
   - 自定义输入链表
   - 打印链表
 
+# [ACM删除重复元素](https://kamacoder.com/problempage.php?pid=1019)
+
+```C++
+#include <iostream>
+using namespace std;
+
+struct ListNode{
+  int val;
+  ListNode* next;
+  ListNode(int val) : val(val), next(nullptr) {}
+};
+
+void printList(ListNode* head){
+    ListNode* cur = head;
+    while (cur){
+        cout << cur->val << " ";
+        cur = cur->next;
+    }
+    cout << endl;
+}
+
+ListNode* removeRepeatNode(ListNode* head){
+    ListNode* dummyHead = new ListNode(0);
+    dummyHead->next = head;
+    ListNode* cur = dummyHead->next;
+    //ListNode* pre = dummyHead;
+    
+    while (cur != NULL && cur->next != NULL){
+        if (cur->val == cur->next->val){
+            if (cur->next->next != NULL){cur->next = cur->next->next;}
+            else {cur->next = NULL;}
+        }else {cur = cur->next;}
+        
+    }
+    return dummyHead->next;
+}
+
+int main(){
+    int length, nodeVal;
+    while (cin >> length){
+        if (length == 0){
+            cout << "list is empty" << endl;
+            continue;
+        }
+        ListNode* dummyHead = new ListNode(0);
+        ListNode* cur = dummyHead;
+        while (length--){
+            cin >> nodeVal;
+            ListNode* newNode = new ListNode(nodeVal);
+            cur->next = newNode;
+            cur = cur->next;
+        }
+        printList(dummyHead->next);
+        printList(removeRepeatNode(dummyHead->next));
+    }
+    return 0;
+}
+```
+
+- 注意链表的末尾
