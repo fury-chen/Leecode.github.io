@@ -1,0 +1,25 @@
+# [136. 只出现一次的数字 ](https://leetcode.cn/problems/single-number/solutions/242211/zhi-chu-xian-yi-ci-de-shu-zi-by-leetcode-solution/?envType=study-plan-v2&envId=top-100-liked)
+
+## 题解思路
+
+- 要求实现线性时间复杂度和常数空间复杂度，使得使用暴力和Hash都不符合题意
+- 使用位运算——异或：
+  - 任何数和0做异或运算，结果仍是原来的数
+  - 任何数和自身做异或运算，结果仍是0
+  - 异或满足交换和结合律
+
+## 示例代码
+
+```C++
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        int res = 0;
+        for (auto num : nums){
+            res ^= num;
+        }
+        return res;
+    }
+};
+```
+
