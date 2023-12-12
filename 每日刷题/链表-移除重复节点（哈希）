@@ -1,0 +1,29 @@
+# [面试题 02.01. 移除重复节点](https://leetcode.cn/problems/remove-duplicate-node-lcci/description/)
+
+## 题解思路
+
+- 使用哈希表来判断是否重复，重复就执行删除操作，注意是判断next是否重复
+
+## 示例代码
+
+```C++
+class Solution {
+public:
+    ListNode* removeDuplicateNodes(ListNode* head) {
+        unordered_set<int> uset;
+        ListNode* dummyHead = new ListNode(0);
+        dummyHead->next = head;
+        ListNode* cur = dummyHead;
+        while (cur->next != NULL){
+            if (uset.find(cur->next->val) != uset.end()){
+                cur->next = cur->next->next;
+            }else {
+                uset.insert(cur->next->val);
+                cur = cur->next;
+            }
+        }
+        return dummyHead->next;
+    }
+};
+```
+
