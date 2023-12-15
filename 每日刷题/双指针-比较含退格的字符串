@@ -1,0 +1,31 @@
+# [844. 比较含退格的字符串 ](https://leetcode.cn/problems/backspace-string-compare/description/)
+
+## 题解思路
+
+- 使用双指针，如果是退格符号就将slow--，否则平移
+
+## 示例代码
+
+```C++
+	class Solution {
+public:
+    bool backspaceCompare(string s, string t) {
+        changeString(s);
+        changeString(t);
+        return s == t;
+
+    }
+    void changeString(string& s){
+        int slow = 0;
+        for (int fast = 0; fast < s.size(); fast++){
+            if (s[fast] != '#'){
+                s[slow++] = s[fast];
+            }else if (slow != 0)
+                slow--;
+            
+        }
+        s.resize(slow);
+    }
+};
+```
+
