@@ -172,34 +172,29 @@ public:
         vector<vector<int>> result;
         sort(nums.begin(), nums.end());
         for (int i = 0; i < nums.size(); i++){
-            if (nums[i] > 0){
-                break;
-            }
-            if (i > 0 && nums[i] == nums[i - 1]){
-                continue;
-            }
+            if (nums[i] > 0) return result;
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
             int left = i + 1;
             int right = nums.size() - 1;
             while (right > left){
-                if (nums[i] + nums[left] + nums[right] > 0){
+                if (nums[i] + nums[left] + nums[right] > 0) right--;
+                else if (nums[i] + nums[left] + nums[right] < 0) left++;
+                else {
+                    result.push_back(vector<int> {nums[i], nums[left], nums[right]});
+                    while (right > left && nums[left] == nums[left + 1]) left++;
+                    while (right > left && nums[right] == nums[right - 1]) right--;
                     right--;
-                }
-                else if (nums[i] + nums[left] + nums[right] < 0){
                     left++;
-                }
-                else{
-                    result.push_back(vector<int>{nums[i], nums[left], nums[right]});
-                    while(right > left && nums[right] == nums[right - 1]) {right--;}
-                    while(right > left && nums[left] == nums[left + 1]){left++;}
-                    left++;
-                    right--; 
                 }
             }
         }
         return result;
-        
     }
 };
+//将本题拆解成三个部分：
+//1.排序去重：通过排序将大小相邻的变成位置相邻
+//2.双指针遍历，二分查找
+//3.符合条件的去重，当左右指针分别可能在当前循环重复要去重
 ```
 
 # [18.四数之和](https://leetcode.cn/problems/4sum/)
