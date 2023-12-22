@@ -98,6 +98,9 @@ public:
 
 
 # [559. N 叉树的最大深度 ](https://leetcode.cn/problems/maximum-depth-of-n-ary-tree/)
+## 题解思路
+- 对比和二叉树，N叉树有可以直接获取当前层size的方法，因此不需要queue做辅助容器，可以直接递归一层for循环搞定
+- 如果采用迭代，则依然是按照层序的模板去套
 
 ## 示例代码
 
@@ -122,6 +125,19 @@ public:
             depth++;
         }
         return depth;
+    }
+};
+
+//recursion
+class Solution {
+public:
+    int maxDepth(Node* root) {
+        if (root == 0) return 0;
+        int depth = 0;
+        for (int i = 0; i < root->children.size(); i++){
+            depth = max(depth, maxDepth(root->children[i]));
+        }
+        return depth + 1;
     }
 };
 ```
