@@ -4,8 +4,6 @@
 
 [分享丨【题单】链表、二叉树与一般树（前后指针/快慢指针/DFS/BFS/直径/LCA）](https://leetcode.cn/circle/discuss/K0n2gO/)
 
-
-
 ## 链表操作：
 
 ### 遍历链表：
@@ -168,6 +166,97 @@
               cur = cur->next;
           }
           return res;
+      }
+  };
+  ```
+
+  
+
+### 删除节点
+
+- [203. 移除链表元素 - 力扣（LeetCode）](https://leetcode.cn/problems/remove-linked-list-elements/description/)
+
+  ```C++
+  class Solution {
+  public:
+      ListNode* removeElements(ListNode* head, int val) {
+          ListNode* dummyHead = new ListNode(0);
+          dummyHead->next = head;
+          ListNode* cur = dummyHead;
+          while (cur->next){
+              if (cur->next->val == val){
+                  ListNode* tmp = cur->next;
+                  cur->next = cur->next->next;
+                  delete tmp;
+                  tmp = nullptr;
+              }
+              else cur = cur->next;
+          }
+          return dummyHead->next;
+      }
+  };
+  ```
+
+- [3217. 从链表中移除在数组中存在的节点 - 力扣（LeetCode）](https://leetcode.cn/problems/delete-nodes-from-linked-list-present-in-array/description/)
+
+  ```C++
+  class Solution {
+  public:
+      ListNode* modifiedList(vector<int>& nums, ListNode* head) {
+          unordered_set<int> numSet(nums.begin(), nums.end());
+          ListNode* dummyHead = new ListNode(0);
+          dummyHead->next = head;
+          ListNode* cur = dummyHead;
+          while (cur->next){
+              if (numSet.count(cur->next->val)){
+                  cur->next = cur->next->next;
+              } else {
+                  cur = cur->next;
+              }
+          }
+          return dummyHead->next;
+      }
+  };
+  ```
+
+- [83. 删除排序链表中的重复元素 - 力扣（LeetCode）](https://leetcode.cn/problems/remove-duplicates-from-sorted-list/)
+
+  ```C++
+  class Solution {
+  public:
+      ListNode* deleteDuplicates(ListNode* head) {
+          ListNode* cur = head;
+          while (cur){
+              while (cur->next && cur->val == cur->next->val){
+                  cur->next = cur->next->next;
+              }
+              cur = cur->next;
+          }
+          return head;
+      }
+  };
+  ```
+
+- [82. 删除排序链表中的重复元素 II - 力扣（LeetCode）](https://leetcode.cn/problems/remove-duplicates-from-sorted-list-ii/description/)
+
+  ```C++
+  class Solution {
+  public:
+      ListNode* deleteDuplicates(ListNode* head) {
+          ListNode* dummyHead = new ListNode(0);
+          dummyHead->next = head;
+          auto cur = dummyHead;
+          while (cur->next && cur->next->next){
+              int val = cur->next->val;
+              if (cur->next->next->val == val){
+                  while (cur->next && cur->next->val == val){
+                      cur->next = cur->next->next;
+                  }
+              } else {
+                  cur = cur->next;
+              }
+          }
+          return dummyHead->next;
       }
   };
   ```
