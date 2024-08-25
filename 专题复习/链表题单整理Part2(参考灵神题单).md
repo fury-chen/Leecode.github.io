@@ -261,4 +261,199 @@
   };
   ```
 
+- [237. 删除链表中的节点 - 力扣（LeetCode）](https://leetcode.cn/problems/delete-node-in-a-linked-list/description/)
+
+  ```C++
+  class Solution {
+  public:
+      void deleteNode(ListNode* node) {
+          node->val = node->next->val;
+          node->next = node->next->next;
+      }
+  };
+  ```
+
+  
+
+- [1669. 合并两个链表 - 力扣（LeetCode）](https://leetcode.cn/problems/merge-in-between-linked-lists/description/)
+
+  ```C++
+  class Solution {
+  private:
+      int list_len(ListNode* head){
+          int len = 0;
+          ListNode* cur = head;
+          while (cur){
+              len++;
+              cur = cur->next;
+          }
+          return len;
+      }
+  
+      vector<ListNode*> cut_list(ListNode* head, int a, int b){
+          vector<ListNode*> cut(4, nullptr);
+          cut[0] = head;
+          ListNode* cur = head;
+          for (int i = 0; i < a - 1; i++){
+              cur = cur->next;
+              cout << cur->val << endl;
+          }
+          ListNode* tail1 = cur;
+          cout << "tail1 = " << tail1->val << endl;
+          cut[1] = tail1;
+          for (int i = 0; i < b - a + 1; i++){
+              cur = cur->next;
+          }
+          ListNode* head2 = cur->next;
+          cut[2] = head2;
+          while (cur->next){
+              cur = cur->next;
+          }
+          ListNode* tail2 = cur;
+          //cout << head2->val << endl;
+          // cout << tail1->val << endl;
+          // cout << tail2->val << endl;
+          tail1->next = nullptr;
+          tail2->next = nullptr;
+          return cut;
+      }
+  public:
+      ListNode* mergeInBetween(ListNode* list1, int a, int b, ListNode* list2) {
+          int n = list_len(list1);
+          int m = list_len(list2);
+          vector<ListNode*> tmp = cut_list(list1, a, b);
+          tmp[1]->next = list2;
+          auto cur2 = list2;
+          while (cur2->next){
+              cur2 = cur2->next;
+          }
+          cur2->next = tmp[2];
+          return list1;
+      }
+  };
+  
+  
+  //官解：思路简洁很多
+  class Solution {
+  public:
+      ListNode* mergeInBetween(ListNode* list1, int a, int b, ListNode* list2) {
+          ListNode* preA = list1;
+          for (int i = 0; i < a - 1; i++){
+              preA = preA->next;
+          }
+          ListNode* preB = preA;
+          for (int i = 0; i < b - a + 2; i++){
+              preB = preB->next;
+          }
+          preA->next = list2;
+          while (list2->next){
+              list2 = list2->next;
+          }
+          list2->next = preB;
+          return list1;
+      }
+  };
+  ```
+
+  
+
+- [2487. 从链表中移除节点 - 力扣（LeetCode）](https://leetcode.cn/problems/remove-nodes-from-linked-list/description/)
+
+  ```C++
+  class Solution {
+  private:
+      ListNode* reverse(ListNode* head){
+          ListNode* pre = nullptr;
+          ListNode* cur = head;
+          while (cur){
+              ListNode* tmp = cur->next;
+              cur->next = pre;
+              pre = cur;
+              cur = tmp;
+          }
+          return pre;
+      }
+  public:
+      ListNode* removeNodes(ListNode* head) {
+          head = reverse(head);
+          ListNode* cur = head;
+          while (cur->next){
+              if (cur->val > cur->next->val){
+                  cur->next = cur->next->next;
+              } else {
+                  cur = cur->next;
+              }
+          }
+          return reverse(head);
+      }
+  };
+  ```
+
+### 插入节点
+
+- [2807. 在链表中插入最大公约数 - 力扣（LeetCode）](https://leetcode.cn/problems/insert-greatest-common-divisors-in-linked-list/description/)
+
+  ```C++
+  class Solution {
+  private:
+      int gcd(int a, int b){
+          if (a % b == 0) return b;
+          else return gcd(b, a % b);
+      }
+  public:
+      ListNode* insertGreatestCommonDivisors(ListNode* head) {
+          for (auto cur = head; cur->next; cur = cur->next->next){
+              cur->next = new ListNode(gcd(cur->val, cur->next->val), cur->next);
+          }
+          return head;
+      }
+  };
+  ```
+
+  - 如何求最大公约数代码：[C++求最大公因数(gcd)的六重境界_c++ gcd-CSDN博客](https://blog.csdn.net/ceshyong/article/details/126211832)
+
+    ```C++
+    //迭代
+    int gcd(int a,int b)
+    {
+    	while(b>0)
+    	{
+    		int r=a%b;
+    		a=b;b=r;
+    	}
+    	return a;
+    }
+    //递归
+    int gcd(int a,int b)
+    {
+        if(a%b==0) return b;
+        else return gcd(b,a%b);
+    }
+    ```
+
+- [147. 对链表进行插入排序 - 力扣（LeetCode）](https://leetcode.cn/problems/insertion-sort-list/description/)
+
+  ```C++
+  class Solution {
+  public:
+      ListNode* insertionSortList(ListNode* head) {
+          if (!head) return head;
+          ListNode* dummy = new ListNode(0);
+          ListNode* cur = head;
+          ListNode* pre = dummy;
+          while (cur) {
+              while (pre->next && pre->next->val < cur->val){
+                  pre = pre->next;
+              }
+              auto nextNode = cur->next;
+              cur->next = pre->next;
+              pre->next = cur;
+              pre = dummy;
+              cur = nextNode;
+          }
+          return dummy->next;
+      }
+  };
+  ```
+
   
