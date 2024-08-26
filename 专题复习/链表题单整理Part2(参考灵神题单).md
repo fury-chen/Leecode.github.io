@@ -457,3 +457,53 @@
   ```
 
   
+
+- [LCR 029. 循环有序列表的插入 - 力扣（LeetCode）](https://leetcode.cn/problems/4ueAj6/description/)
+
+  ```C++
+  /*
+  // Definition for a Node.
+  class Node {
+  public:
+      int val;
+      Node* next;
+  
+      Node() {}
+  
+      Node(int _val) {
+          val = _val;
+          next = NULL;
+      }
+  
+      Node(int _val, Node* _next) {
+          val = _val;
+          next = _next;
+      }
+  };
+  */
+  
+  class Solution {
+  public:
+      Node* insert(Node* head, int insertVal) {
+          if (!head) {
+              head = new Node(insertVal);
+              head->next = head;
+              return head;
+          }
+          auto cur =  head;
+          while (cur->next != head){
+              if (cur->next->val < cur->val){
+                  if (cur->next->val >= insertVal) break;
+                  else if (cur->val <= insertVal) break;
+              }
+   //情况讨论：1、在环形升序的情况下讨论，insertVal严格插入时需要前后都满足升序关系，而不严谨的情况下只需要符合前或后其一即可定cur
+              if (cur->val <= insertVal && cur->next->val >= insertVal) break;
+              cur = cur->next;
+          }
+          cur->next = new Node(insertVal, cur->next);
+          return head;
+      }
+  };
+  ```
+
+  
