@@ -1,7 +1,7 @@
 # [704 二分查找](https://leetcode.cn/problems/binary-search/submissions/)
 ## 思路分析
 **1.区间不变量**<br>
-二分法通过在vector对半取下标来进行target查找，思路简单，但容易出错，注意前提是**有序数组**。<br>
+二分法通过在vector对半取下标来进行target查找，思路简单，但容易出错，注意前提是**有序数组**且是组内元素不重复。<br>
 - 写法1：左闭右开(l = 0, r = n, while(l < r))
  ``` C++
   left = 0
